@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, jsonify
 
 hello_world_bp = Blueprint("hello_world", __name__)
    
@@ -28,3 +28,19 @@ books = [
     Book(2, "Tian Guan Ci Fu", "Ghost King and Fallen God fall in love"),
     Book(3, "Grokking Algorithms", "Visual coding lesson")
 ]
+
+books_bp = Blueprint("books", __name__, url_prefix="/books")
+## /books is the group route, 
+## "books" is the debug name
+## use blueprint for all RESTful routes beginning w /books
+
+@books_bp.route("", methods=["GET"])
+def handle_books():
+    books_response = []
+    for book in books:
+        books_response.append({
+            "id": book.id,
+            "title": book.title,
+            "description": book.description
+        })
+    return jsonify(books_response) # 200 OK
