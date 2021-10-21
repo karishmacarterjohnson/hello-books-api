@@ -36,6 +36,7 @@ books_bp = Blueprint("books", __name__, url_prefix="/books")
 ## "books" is the debug name
 ## use blueprint for all RESTful routes beginning w /books
 
+'''
 @books_bp.route("", methods=["GET"])
 def handle_books():
     books_response = []
@@ -57,3 +58,4 @@ def handle_book(book_id):
                 "title": book.title,
                 "description": book.description
             }
+'''
