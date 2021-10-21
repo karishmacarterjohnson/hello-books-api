@@ -50,24 +50,33 @@ def handle_book(book_id):
     
     if request.method == "GET":
         # ... existing code that returned a dictionary
-        return {
-        "id": book.id,
-        "title": book.title,
-        "description": book.description
-        }
+        try:
+            return {
+            "id": book.id,
+            "title": book.title,
+            "description": book.description
+            }
+        except:
+            return 404
     elif request.method == "PUT":
-        form_data = request.get_json()
+        try:
+            form_data = request.get_json()
 
-        book.title = form_data["title"]
-        book.description = form_data["description"]
+            book.title = form_data["title"]
+            book.description = form_data["description"]
 
-        db.session.commit()
+            db.session.commit()
+        except:
+            return 404
 
         return make_response(f"Book #{book.id} successfully updated")
     elif request.method == "DELETE":
-        db.session.delete(book)
-        db.session.commit()
-        return make_response(f"Book #{book.id} successfully deleted")
+        try:
+            db.session.delete(book)
+            db.session.commit()
+            return make_response(f"Book #{book.id} successfully deleted")
+        except:
+            return 404
 '''
 @books_bp.route("", methods=["GET"])
 def handle_books():
