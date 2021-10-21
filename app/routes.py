@@ -43,7 +43,15 @@ def handle_books():
 
         return make_response(f"Book {new_book.title} successfully created", 201)
 
+@books_bp.route("/<book_id>", methods=["GET"])
+def handle_book(book_id):
+    book = Book.query.get(book_id)
 
+    return {
+        "id": book.id,
+        "title": book.title,
+        "description": book.description
+    }
 '''
 @books_bp.route("", methods=["GET"])
 def handle_books():
