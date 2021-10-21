@@ -17,5 +17,7 @@ def create_app(test_config=None):
 
     from .routes import books_bp
     app.register_blueprint(books_bp)
+    
+    from app.models.book import Book
 
     return app
