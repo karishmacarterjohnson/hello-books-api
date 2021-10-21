@@ -17,6 +17,7 @@ def karishma_info():
 
     return karishma_body
 
+'''
 class Book:
     def __init__(self, id, title, description):
         self.id = id
@@ -28,6 +29,7 @@ books = [
     Book(2, "Tian Guan Ci Fu", "Ghost King and Fallen God fall in love"),
     Book(3, "Grokking Algorithms", "Visual coding lesson")
 ]
+'''
 
 books_bp = Blueprint("books", __name__, url_prefix="/books")
 ## /books is the group route, 
