@@ -50,14 +50,15 @@ def handle_book(book_id):
     
     if request.method == "GET":
         # ... existing code that returned a dictionary
-        try:
+        if book is None:
+            return make_response("", 404)
+        else:
             return {
             "id": book.id,
             "title": book.title,
             "description": book.description
             }
-        except:
-            return 404
+        
     elif request.method == "PUT":
         try:
             form_data = request.get_json()
