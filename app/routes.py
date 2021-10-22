@@ -60,24 +60,26 @@ def handle_book(book_id):
             }
         
     elif request.method == "PUT":
-        try:
+        if book is not None:
             form_data = request.get_json()
 
             book.title = form_data["title"]
             book.description = form_data["description"]
 
             db.session.commit()
-        except:
-            return 404
+            return make_response(f"Book #{book.id} successfully updated")
 
-        return make_response(f"Book #{book.id} successfully updated")
+        else:
+            return make_response("", 404)
+
     elif request.method == "DELETE":
-        try:
+        if book is not None:
             db.session.delete(book)
             db.session.commit()
             return make_response(f"Book #{book.id} successfully deleted")
-        except:
-            return 404
+        else:
+            return make_response("", 404)
+
 '''
 @books_bp.route("", methods=["GET"])
 def handle_books():
